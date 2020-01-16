@@ -1,10 +1,10 @@
 import java.util.*;
 import java.io.*;
 
-public class SUBREM {
+public class Main {
     public static void main(String[] args) throws IOException {
-        SUBREM s = new SUBREM();
-        s.solve();
+        Main m = new Main();
+        m.solve();
     }
 
     public void solve() throws IOException {

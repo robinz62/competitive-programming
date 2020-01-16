@@ -1,10 +1,10 @@
 import java.io.*;
 import java.util.*;
 
-public class XORMIN {
+public class Main {
     public static void main(String[] args) throws IOException {
-        XORMIN x = new XORMIN();
-        x.solve();
+        Main m = new Main();
+        m.solve();
     }
 
     int MAXN = 10000000;

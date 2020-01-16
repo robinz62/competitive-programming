@@ -1,10 +1,10 @@
 import java.io.*;
 import java.util.*;
 
-public class CHEFOFR {
+public class Main {
     public static void main(String[] args) throws IOException {
-        CHEFOFR c = new CHEFOFR();
-        c.solve();
+        Main m = new Main();
+        m.solve();
     }
 
     public void solve() throws IOException {

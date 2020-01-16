@@ -1,10 +1,10 @@
 import java.io.*;
 import java.util.*;
 
-public class KLPM {
+public class Main {
     public static void main(String[] args) throws IOException {
-        KLPM k = new KLPM();
-        k.solve();
+        Main m = new Main();
+        m.solve();
     }
 
     boolean[][] palindrome;

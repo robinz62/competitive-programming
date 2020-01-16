@@ -1,10 +1,10 @@
 import java.util.*;
 import java.io.*;
 
-public class SJ1 {
+public class Main {
     public static void main(String[] args) throws IOException {
-        SJ1 s = new SJ1();
-        s.solve();
+        Main m = new Main();
+        m.solve();
     }
 
     Map<Integer, Long> leafToAnswer = new TreeMap<>();
