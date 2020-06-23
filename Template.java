@@ -19,15 +19,15 @@ public class Main {
         br.close();
     }
 
-    int readInt() throws IOException {
+    int ri() throws IOException {
         return Integer.parseInt(br.readLine());
     }
 
-    long readLong() throws IOException {
+    long rl() throws IOException {
         return Long.parseLong(br.readLine());
     }
 
-    int[] readIntLine() throws IOException {
+    int[] ril() throws IOException {
         String[] tokens = br.readLine().split(" ");
         int[] A = new int[tokens.length];
         for (int i = 0; i < A.length; i++)
@@ -35,7 +35,7 @@ public class Main {
         return A;
     }
 
-    long[] readLongLine() throws IOException {
+    long[] rll() throws IOException {
         String[] tokens = br.readLine().split(" ");
         long[] A = new long[tokens.length];
         for (int i = 0; i < A.length; i++)
@@ -44,7 +44,7 @@ public class Main {
     }
 
     void solve() throws IOException {
-        int t = readInt();
+        int t = ri();
         for (int ti = 0; ti < t; ti++) {
             
         }
