@@ -1,0 +1,63 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    PrintWriter pw = new PrintWriter(System.out);
+    static int MOD = 1000000007;
+
+    public static void main(String[] args) throws IOException {
+        Main m = new Main();
+        m.solve();
+        m.close();
+    }
+
+    void close() throws IOException {
+        pw.flush();
+        pw.close();
+        br.close();
+    }
+
+    int ri() throws IOException {
+        return Integer.parseInt(br.readLine());
+    }
+
+    long rl() throws IOException {
+        return Long.parseLong(br.readLine());
+    }
+
+    int[] ril() throws IOException {
+        String[] tokens = br.readLine().split(" ");
+        int[] A = new int[tokens.length];
+        for (int i = 0; i < A.length; i++)
+            A[i] = Integer.parseInt(tokens[i]);
+        return A;
+    }
+
+    long[] rll() throws IOException {
+        String[] tokens = br.readLine().split(" ");
+        long[] A = new long[tokens.length];
+        for (int i = 0; i < A.length; i++)
+            A[i] = Long.parseLong(tokens[i]);
+        return A;
+    }
+
+    void solve() throws IOException {
+        int t = ri();
+        for (int ti = 0; ti < t; ti++) {
+            char[] s = br.readLine().toCharArray();
+            int moves = 0;
+            List<Character> l = new ArrayList<>();
+            for (char c : s) {
+                if (!l.isEmpty() && l.get(l.size() - 1) != c) {
+                    l.remove(l.size() - 1);
+                    moves++;
+                } else {
+                    l.add(c);
+                }
+            }
+            pw.println(moves % 2 == 0 ? "NET" : "DA");
+        }
+    }
+}
