@@ -27,20 +27,46 @@ public class Main {
         return Long.parseLong(br.readLine());
     }
 
-    int[] ril() throws IOException {
-        String[] tokens = br.readLine().split(" ");
-        int[] A = new int[tokens.length];
-        for (int i = 0; i < A.length; i++)
-            A[i] = Integer.parseInt(tokens[i]);
-        return A;
+    int[] ril(int n) throws IOException {
+        int[] nums = new int[n];
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            int sign = 1;
+            c = br.read();
+            int x = 0;
+            if (c == '-') {
+                sign = -1;
+                c = br.read();
+            }
+            while (c >= '0' && c <= '9') {
+                x = x * 10 + c - '0';
+                c = br.read();
+            }
+            nums[i] = x * sign;
+        }
+        while (c != '\n' && c != -1) c = br.read();
+        return nums;
     }
 
-    long[] rll() throws IOException {
-        String[] tokens = br.readLine().split(" ");
-        long[] A = new long[tokens.length];
-        for (int i = 0; i < A.length; i++)
-            A[i] = Long.parseLong(tokens[i]);
-        return A;
+    long[] rll(int n) throws IOException {
+        long[] nums = new long[n];
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            int sign = 1;
+            c = br.read();
+            long x = 0;
+            if (c == '-') {
+                sign = -1;
+                c = br.read();
+            }
+            while (c >= '0' && c <= '9') {
+                x = x * 10 + c - '0';
+                c = br.read();
+            }
+            nums[i] = x * sign;
+        }
+        while (c != '\n' && c != -1) c = br.read();
+        return nums;
     }
 
     void solve() throws IOException {
