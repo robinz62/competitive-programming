@@ -72,7 +72,7 @@ public class Main {
     void solve() throws IOException {
         int t = ri();
         for (int ti = 0; ti < t; ti++) {
-            
+
         }
     }
 }
