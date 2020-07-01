@@ -69,6 +69,10 @@ public class Main {
         return nums;
     }
 
+    char[] rs() throws IOException {
+        return br.readLine().toCharArray();
+    }
+
     void solve() throws IOException {
         int t = ri();
         for (int ti = 0; ti < t; ti++) {
