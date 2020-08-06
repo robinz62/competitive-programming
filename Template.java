@@ -3,9 +3,19 @@ import java.math.BigInteger;
 import java.util.*;
 
 public class Main {
+    static int MOD = 1000000007;
+
+    void solve() throws IOException {
+        int t = ri();
+        for (int ti = 0; ti < t; ti++) {
+
+        }
+    }
+
+    // Template code below
+
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     PrintWriter pw = new PrintWriter(System.out);
-    static int MOD = 1000000007;
 
     public static void main(String[] args) throws IOException {
         Main m = new Main();
@@ -73,10 +83,22 @@ public class Main {
         return br.readLine().toCharArray();
     }
 
-    void solve() throws IOException {
-        int t = ri();
-        for (int ti = 0; ti < t; ti++) {
-
+    void sort(int[] A) {
+        Random r = new Random();
+        for (int i = A.length-1; i > 0; i--) {
+            int j = r.nextInt(i+1);
+            A[i] ^= A[j];
+            A[j] ^= A[i];
+            A[i] ^= A[j];
         }
+        Arrays.sort(A);
+    }
+
+    int max(int a, int b) {
+        return a >= b ? a : b;
+    }
+
+    int min(int a, int b) {
+        return a <= b ? a : b;
     }
 }
