@@ -5,6 +5,10 @@ import java.util.*;
 public class Main {
     static int MOD = 1000000007;
 
+    // After writing solution, quick scan for:
+    //   int overflow
+    //   array out of bounds
+    //   special cases e.g. n=1?
     void solve() throws IOException {
         int t = ri();
         for (int ti = 0; ti < t; ti++) {
