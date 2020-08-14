@@ -91,9 +91,9 @@ public class Main {
         Random r = new Random();
         for (int i = A.length-1; i > 0; i--) {
             int j = r.nextInt(i+1);
-            A[i] ^= A[j];
-            A[j] ^= A[i];
-            A[i] ^= A[j];
+            int temp = A[i];
+            A[i] = A[j];
+            A[j] = temp;
         }
         Arrays.sort(A);
     }
