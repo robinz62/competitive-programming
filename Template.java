@@ -6,9 +6,12 @@ public class Main {
     static int MOD = 1000000007;
 
     // After writing solution, quick scan for:
-    //   int overflow
     //   array out of bounds
     //   special cases e.g. n=1?
+    //
+    // Big numbers arithmetic bugs:
+    //   int overflow
+    //   sorting, or taking max, after MOD
     void solve() throws IOException {
         int t = ri();
         for (int ti = 0; ti < t; ti++) {
