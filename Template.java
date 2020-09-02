@@ -13,8 +13,8 @@ public class Main {
     //   int overflow
     //   sorting, or taking max, after MOD
     void solve() throws IOException {
-        int t = ri();
-        for (int ti = 0; ti < t; ti++) {
+        int T = ri();
+        for (int Ti = 0; Ti < T; Ti++) {
 
         }
     }
@@ -99,13 +99,5 @@ public class Main {
             A[j] = temp;
         }
         Arrays.sort(A);
-    }
-
-    int max(int a, int b) {
-        return a >= b ? a : b;
-    }
-
-    int min(int a, int b) {
-        return a <= b ? a : b;
     }
 }
