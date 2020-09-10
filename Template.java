@@ -86,6 +86,36 @@ public class Main {
         return nums;
     }
 
+    int[] rkil() throws IOException {
+        int sign = 1;
+        int c = br.read();
+        int x = 0;
+        if (c == '-') {
+            sign = -1;
+            c = br.read();
+        }
+        while (c >= '0' && c <= '9') {
+            x = x * 10 + c - '0';
+            c = br.read();
+        }
+        return ril(x);
+    }
+
+    long[] rkll() throws IOException {
+        int sign = 1;
+        int c = br.read();
+        int x = 0;
+        if (c == '-') {
+            sign = -1;
+            c = br.read();
+        }
+        while (c >= '0' && c <= '9') {
+            x = x * 10 + c - '0';
+            c = br.read();
+        }
+        return rll(x);
+    }
+
     char[] rs() throws IOException {
         return br.readLine().toCharArray();
     }
