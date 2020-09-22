@@ -37,11 +37,11 @@ public class Main {
     }
 
     int ri() throws IOException {
-        return Integer.parseInt(br.readLine());
+        return Integer.parseInt(br.readLine().trim());
     }
 
     long rl() throws IOException {
-        return Long.parseLong(br.readLine());
+        return Long.parseLong(br.readLine().trim());
     }
 
     int[] ril(int n) throws IOException {
