@@ -130,4 +130,8 @@ public class Main {
         }
         Arrays.sort(A);
     }
+
+    void printDouble(double d) {
+        pw.printf("%f", d);
+    }
 }
