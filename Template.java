@@ -132,6 +132,6 @@ public class Main {
     }
 
     void printDouble(double d) {
-        pw.printf("%f", d);
+        pw.printf("%.16f", d);
     }
 }
