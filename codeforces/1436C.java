@@ -13,10 +13,60 @@ public class Main {
     //   int overflow
     //   sorting, or taking max, after MOD
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
+        fact = new long[1001];
+        fact[0] = 1;
+        for (int i = 1; i <= 1000; i++) fact[i] = fact[i-1] * i % MOD;
+        choose = new long[1001][1001];
+        for (int i = 0; i <= 1000; i++) choose[i][0] = 1;
+        for (int i = 1; i <= 1000; i++) {
+            for (int j = 1; j <= i; j++) {
+                choose[i][j] = (choose[i-1][j] + choose[i-1][j-1]) % MOD;
+            }
         }
+
+        int[] nxpos = ril(3);
+        int n = nxpos[0];
+        int x = nxpos[1];
+        int pos = nxpos[2];
+
+        int[] identity = new int[n];
+        for (int i = 0; i < n; i++) identity[i] = i;
+
+        int[] comps = bs(identity, pos);
+        comps[0]--;  // -1 b/c x is fixed at pos gives an up for free
+
+        int u = comps[0];
+        int d = comps[1];
+
+        long ans = choose(x-1, comps[0]) * choose(n-x, comps[1]) % MOD * fact[u] % MOD * fact[d] % MOD * fact[n - u - d - 1] % MOD;
+        pw.println(ans);
+    }
+
+    long[][] choose;
+    long[] fact;
+    long choose(int n, int k) {
+        if (n < k) return 0;
+        if (n < 0) return 0;
+        if (k < 0) return 0;
+        return choose[n][k];
+    }
+
+    int[] bs(int[] a, int x) {
+        int[] comps = new int[2];  // up, down
+        int l = 0;
+        int r = a.length;
+        while (l < r) {
+            int m = (l + r) / 2;
+            if (a[m] <= x) {
+                l = m+1;
+                comps[0]++;
+            } else {
+                r = m;
+                comps[1]++;
+            }
+        }
+        if (l > 0 && a[l-1] == x) return comps;
+        return null;
     }
 
     // Template code below
