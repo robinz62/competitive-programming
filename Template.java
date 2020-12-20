@@ -8,6 +8,7 @@ public class Main {
     // After writing solution, quick scan for:
     //   array out of bounds
     //   special cases e.g. n=1?
+    //   npe, particularly in maps
     //
     // Big numbers arithmetic bugs:
     //   int overflow
