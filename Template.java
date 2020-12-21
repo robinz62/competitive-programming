@@ -19,6 +19,8 @@ public class Main {
 
         }
     }
+    // IMPORTANT
+    // DID YOU CHECK THE COMMON MISTAKES ABOVE?
 
     // Template code below
 
