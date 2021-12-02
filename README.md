@@ -9,7 +9,7 @@ large inputs, be sure to increase the memory (`-Xmx512m`) and/or stack memory
 problem id and archive it for keepsake.
 
 All code committed to this repo has received AC verdict, though not necessarily
-optimal. Code submitted to contests with partial scoring (e.g. Codechef) may
-also not receive full points.
+optimal (wrt theoretical running time). Code submitted to contests with partial
+scoring (i.e. Codechef) may also not have received full points.
 
-https://www.youtube.com/watch?v=SlCRfTmBSGs&ab_channel=LuCkyvideo
+https://www.youtube.com/watch?v=SlCRfTmBSGs
