@@ -11,5 +11,3 @@ problem id and archive it for keepsake.
 All code committed to this repo has received AC verdict, though not necessarily
 optimal (wrt theoretical running time). Code submitted to contests with partial
 scoring (i.e. Codechef) may also not have received full points.
-
-https://www.youtube.com/watch?v=SlCRfTmBSGs
