@@ -12,6 +12,7 @@ public class Main {
     //
     // Big numbers arithmetic bugs:
     //   int overflow
+    //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
     void solve() throws IOException {
         int T = ri();
@@ -90,13 +91,8 @@ public class Main {
     }
 
     int[] rkil() throws IOException {
-        int sign = 1;
         int c = br.read();
         int x = 0;
-        if (c == '-') {
-            sign = -1;
-            c = br.read();
-        }
         while (c >= '0' && c <= '9') {
             x = x * 10 + c - '0';
             c = br.read();
@@ -105,13 +101,8 @@ public class Main {
     }
 
     long[] rkll() throws IOException {
-        int sign = 1;
         int c = br.read();
         int x = 0;
-        if (c == '-') {
-            sign = -1;
-            c = br.read();
-        }
         while (c >= '0' && c <= '9') {
             x = x * 10 + c - '0';
             c = br.read();
