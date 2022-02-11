@@ -1,37 +1,31 @@
+/*
+ID: robinz61
+LANG: JAVA
+TASK: usaco_template
+*/
 import java.io.*;
 import java.math.BigInteger;
 import java.util.*;
 
-public class Main {
+public class usaco_template {
     static int MOD = 1000000007;
 
-    // After writing solution, quick scan for:
-    //   array out of bounds
-    //   special cases e.g. n=1?
-    //   npe, particularly in maps
-    //
-    // Big numbers arithmetic bugs:
-    //   int overflow
-    //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
-    //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
-    void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
+    static String input = "usaco_template.in";
+    static String output = "usaco_template.out";
 
-        }
+    void solve() throws IOException {
+
     }
-    // IMPORTANT
-    // DID YOU CHECK THE COMMON MISTAKES ABOVE?
 
     // Template code below
 
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    PrintWriter pw = new PrintWriter(System.out);
+    static BufferedReader br;
+    static PrintWriter pw;
 
     public static void main(String[] args) throws IOException {
-        Main m = new Main();
+        br = new BufferedReader(new FileReader(input));
+        pw = new PrintWriter(new FileWriter(output));
+        usaco_template m = new usaco_template();
         m.solve();
         m.close();
     }

@@ -14,12 +14,47 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
         int T = ri();
         for (int Ti = 0; Ti < T; Ti++) {
+            int n = ri();
+            int[] a = ril(n);
 
+            // Monotonic: more numbers -> bigger mex
+            // Get mex of all -> MEX value
+            // Find where that happens first
+
+            int[] freqAll = new int[n+5];
+            TreeSet<Integer> missingAll = new TreeSet<>();
+            for (int ai : a) freqAll[ai]++;
+            for (int i = 0; i < freqAll.length; i++) if (freqAll[i] == 0) missingAll.add(i);
+
+            List<Integer> ans = new ArrayList<>();
+
+            TreeSet<Integer> missingGo = new TreeSet<>();
+            for (int i = 0; i < freqAll.length; i++) missingGo.add(i);
+            int target = missingAll.first();
+            int L = 0;
+            for (int i = 0; i < n; i++) {
+                missingGo.remove(a[i]);
+                if (missingGo.first() == target) {
+                    ans.add(target);
+                    for (int j = L; j <= i; j++) {
+                        missingGo.add(a[j]);
+                        freqAll[a[j]]--;
+                        if (freqAll[a[j]] == 0) missingAll.add(a[j]);
+                    }
+                    L = i+1;
+                    target = missingAll.first();
+                }
+            }
+            if (L < n) {
+                ans.add(missingAll.first());
+            }
+
+            pw.println(ans.size());
+            for (int ai : ans) pw.print(ai + " ");
+            pw.println();
         }
     }
     // IMPORTANT

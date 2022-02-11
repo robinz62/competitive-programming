@@ -3,7 +3,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 public class Main {
-    static int MOD = 1000000007;
+    static int MOD = 998244353;
 
     // After writing solution, quick scan for:
     //   array out of bounds
@@ -14,16 +14,50 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
+    long t;
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
+        t = modInverseFermat(2, MOD);
+        long n = rl();
+        long curr = 1;
+        long next = 10;
+        long ans = 0;
+        while (n >= curr) {
+            if (n >= next - 1) {
+                long count = next-1 - curr + 1;
+                ans = (ans + sum(count)) % MOD;
+                curr = next;
+                next *= 10l;
+            } else {
+                long count = n - curr + 1;
+                ans = (ans + sum(count)) % MOD;
+                break;
+            }
         }
+        pw.println(ans);
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?
+
+    long sum(long x) {
+        return (x % MOD) * ((x + 1) % MOD) % MOD * t % MOD;
+    }
+
+    public static long modPow(long base, long exponent, long m) {
+        long ans = 1;
+        base = base % m;
+        while (exponent > 0) {
+            if ((exponent & 1) == 1) ans = (ans * base) % m;
+            exponent >>= 1;
+            base = (base * base) % m;
+        } 
+        return ans;
+    }
+
+    // Computes a^(-1) mod m, the modular inverse of a (modulo m). This
+    // algorithm is based on Fermat's little theorem. m must be prime. O(log m).
+    public static long modInverseFermat(long a, long m) {
+        return modPow(a, m - 2, m);
+    }
 
     // Template code below
 

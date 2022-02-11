@@ -14,13 +14,30 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
+        char[] s = rs();
+        int n = s.length;
+        int suffixAs = 0;
+        for (int i = n-1; i >= 0 && s[i] == 'a'; i--) suffixAs++;
+        int prefixAs = 0;
+        for (int i = 0; i < n && s[i] == 'a'; i++) prefixAs++;
+        int add = Math.max(0, suffixAs - prefixAs);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < add; i++) sb.append('a');
+        sb.append(new String(s));
+        
+        char[] check = sb.toString().toCharArray();
+        int l = 0;
+        int r = check.length-1;
+        while (l < r) {
+            if (check[l] != check[r]) {
+                pw.println("No");
+                return;
+            }
+            l++;
+            r--;
         }
+        pw.println("Yes");
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?

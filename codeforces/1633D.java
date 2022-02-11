@@ -14,12 +14,54 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
         int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
+        int MAX_N = 1000;
 
+        int[] dist = new int[MAX_N + 1];
+        Arrays.fill(dist, -1);
+        Deque<Integer> q = new ArrayDeque<>();
+        q.addLast(1);
+        dist[1] = 0;
+        while (!q.isEmpty()) {
+            int u = q.removeFirst();
+            for (int div = 1; div <= u; div++) {
+                int tgt = u + u / div;
+                if (tgt <= MAX_N && dist[tgt] == -1) {
+                    dist[tgt] = dist[u] + 1;
+                    q.addLast(tgt);
+                }
+            }
+        }
+
+        int maxDist = 0;
+        for (int x : dist) maxDist = Math.max(maxDist, x);
+        
+        for (int Ti = 0; Ti < T; Ti++) {
+            int[] nk = ril(2);
+            int n = nk[0];
+            int k = nk[1];
+
+            int[] b = ril(n);
+            int[] c = ril(n);
+
+            k = Math.min(k, maxDist * n);
+
+            for (int i = 0; i < n; i++) b[i] = dist[b[i]];
+            int[][] dp = new int[n][k+1];
+            if (b[0] <= k) dp[0][b[0]] = c[0];
+            for (int i = 1; i < n; i++) {
+                dp[i][0] = dp[i-1][0] + (b[i] == 0 ? c[i] : 0);
+                for (int ki = 1; ki <= k; ki++) {
+                    dp[i][ki] = Math.max(dp[i][ki], dp[i-1][ki]);
+                    if (b[i] <= ki) {
+                        dp[i][ki] = Math.max(dp[i][ki], dp[i-1][ki - b[i]] + c[i]);
+                    }
+                }
+            }
+            int ans = 0;
+            for (int ki = 0; ki <= k; ki++) ans = Math.max(ans, dp[n-1][ki]);
+            pw.println(ans);
         }
     }
     // IMPORTANT

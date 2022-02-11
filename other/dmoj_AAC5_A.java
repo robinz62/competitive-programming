@@ -14,13 +14,16 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
+        int n = ri();
+        int[] a = ril(n);
+        int odd = 0;
+        int even = 0;
+        for (int ai : a) {
+            if (ai % 2 == 0) even++;
+            else odd++;
         }
+        pw.println(odd / 2 + even / 2);
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?

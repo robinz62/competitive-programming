@@ -1,37 +1,54 @@
+/*
+ID: robinz61
+LANG: JAVA
+TASK: friday
+*/
 import java.io.*;
 import java.math.BigInteger;
 import java.util.*;
 
-public class Main {
+public class friday {
     static int MOD = 1000000007;
 
-    // After writing solution, quick scan for:
-    //   array out of bounds
-    //   special cases e.g. n=1?
-    //   npe, particularly in maps
-    //
-    // Big numbers arithmetic bugs:
-    //   int overflow
-    //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
-    //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
-    void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
+    static String input = "friday.in";
+    static String output = "friday.out";
 
+    void solve() throws IOException {
+        int n = ri();
+        int dayOfWeek = 2;
+        int[] count = new int[7];
+        for (int year = 1900; year < 1900 + n; year++) {
+            for (int month = 0; month < 12; month++) {
+                int days = days(month, year);
+                for (int day = 1; day <= days; day++) {
+                    if (day == 13) count[dayOfWeek]++;
+                    dayOfWeek = (dayOfWeek + 1) % 7;
+                }
+            }
         }
+        pw.print(count[0]);
+        for (int i = 1; i < 7; i++) pw.print(" " + count[i]);
+        pw.println();
     }
-    // IMPORTANT
-    // DID YOU CHECK THE COMMON MISTAKES ABOVE?
+
+    int days(int month, int year) {
+        if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) return 31;
+        if (month == 1) {
+            if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) return 29;
+            return 28;
+        }
+        return 30;
+    }
 
     // Template code below
 
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    PrintWriter pw = new PrintWriter(System.out);
+    static BufferedReader br;
+    static PrintWriter pw;
 
     public static void main(String[] args) throws IOException {
-        Main m = new Main();
+        br = new BufferedReader(new FileReader(input));
+        pw = new PrintWriter(new FileWriter(output));
+        friday m = new friday();
         m.solve();
         m.close();
     }

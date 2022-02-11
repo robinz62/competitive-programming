@@ -19,7 +19,19 @@ public class Main {
     void solve() throws IOException {
         int T = ri();
         for (int Ti = 0; Ti < T; Ti++) {
-
+            int n = ri();
+            int[] a = ril(2 * n);
+            sort(a);
+            int mex1 = 0;
+            int mex2 = 0;
+            for (int i = 0; i < a.length; i++) {
+                if (i % 2 == 0) {
+                    if (a[i] == mex1) mex1++;
+                } else {
+                    if (a[i] == mex2) mex2++;
+                }
+            }
+            pw.println(mex1 == mex2 ? "YES" : "NO");
         }
     }
     // IMPORTANT

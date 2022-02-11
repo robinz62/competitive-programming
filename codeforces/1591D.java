@@ -14,12 +14,50 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
         int T = ri();
         for (int Ti = 0; Ti < T; Ti++) {
+            int n = ri();
+            int[] a = ril(n);
 
+            Set<Integer> set = new HashSet<>();
+            boolean good = false;
+            for (int ai : a) {
+                if (set.contains(ai)) {
+                    good = true;
+                    break;
+                }
+                set.add(ai);
+            }
+            if (good) {
+                pw.println("YES");
+                continue;
+            }
+
+            // coord compress to permutation
+            int[] b = new int[a.length];
+            System.arraycopy(a, 0, b, 0, a.length);
+            sort(b);
+            Map<Integer, Integer> map = new HashMap<>();
+            int idx = 0;
+            map.put(b[0], idx++);
+            for (int i = 1; i < b.length; i++) if (b[i] != b[i-1]) map.put(b[i], idx++);
+            for (int i = 0; i < n; i++) a[i] = map.get(a[i]);
+
+            boolean[] visited = new boolean[n];
+            int swaps = 0;
+            for (int i = 0; i < n; i++) {
+                if (visited[i]) continue;
+                int count = 0;
+                int currIdx = i;
+                while (!visited[currIdx]) {
+                    count++;
+                    visited[currIdx] = true;
+                    currIdx = a[currIdx];
+                }
+                swaps += count-1;
+            }
+            pw.println(swaps % 2 == 0 ? "YES" : "NO");
         }
     }
     // IMPORTANT

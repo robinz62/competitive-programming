@@ -14,13 +14,37 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
+        int[] nk = ril(2);
+        int n = nk[0];
+        int k = nk[1];
+        long[] a = rll(n);
 
+        long ans = 0;
+        // can we get b to be set, while maintaining previous?
+        for (int b = 60; b >= 0; b--) {
+            long want = ans | (1l << b);
+            boolean[][] dp = new boolean[n][k+1];
+            dp[0][1] = (want & a[0]) == want;
+            long boringsum = a[0];
+            for (int i = 1; i < n; i++) {
+                boringsum += a[i];
+                dp[i][1] = (want & boringsum) == want;
+                for (int ki = 2; ki <= k; ki++) {
+                    long last = 0;
+                    for (int j = i; j >= 0; j--) {
+                        last += a[j];
+                        if (j-1 >= 0 && (want & last) == want && dp[j-1][ki-1]) {
+                            dp[i][ki] = true;
+                            break;
+                        } 
+                    }
+                }
+            }
+            if (dp[n-1][k]) ans = want;
         }
+
+        pw.println(ans);
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?

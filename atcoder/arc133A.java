@@ -14,13 +14,38 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
+        int n = ri();
+        int[] a = ril(n);
+        int[] next = new int[n];
+        next[n-1] = -1;
+        int val = a[n-1];
+        for (int i = n-2; i >= 0; i--) {
+            if (a[i] == val) next[i] = next[i+1];
+            else next[i] = val;
+            val = a[i];
         }
+
+        int delIdx = 0;
+        Set<Integer> seen = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            if (seen.contains(a[i])) continue;
+            
+            // Try deleting at i.
+            int bi = next[i];
+            if (bi == -1) {
+                delIdx = i;
+                break;
+            } else if (bi < a[i]) {
+                delIdx = i;
+                break;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (a[i] == a[delIdx]) continue;
+            pw.print(a[i] + " ");
+        }
+        pw.println();
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?

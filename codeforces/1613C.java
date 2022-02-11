@@ -19,7 +19,30 @@ public class Main {
     void solve() throws IOException {
         int T = ri();
         for (int Ti = 0; Ti < T; Ti++) {
+            long[] nh = rll(2);
+            int n = (int) nh[0];
+            long h = nh[1];
+            int[] a = ril(n);
 
+            long l = 1;
+            long r = h;
+            long ans = r;
+            while (l <= r) {
+                long m = l + (r - l) / 2;
+                long hits = 0;
+                for (int i = 0; i < n-1; i++) {
+                    hits += Math.min(a[i+1] - a[i], m);
+                }
+                hits += m;
+
+                if (hits >= h) {
+                    ans = m;
+                    r = m-1;
+                } else {
+                    l = m+1;
+                }
+            }
+            pw.println(ans);
         }
     }
     // IMPORTANT

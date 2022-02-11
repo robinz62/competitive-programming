@@ -19,7 +19,28 @@ public class Main {
     void solve() throws IOException {
         int T = ri();
         for (int Ti = 0; Ti < T; Ti++) {
+            long[] nk = rll(2);
+            int n = (int) nk[0];
+            long k = nk[1];
+            
+            int[] ans = new int[n];
 
+            long curr = n;
+            int l = 0;
+            for (int r = 0; r < n; r++) {
+                long len = r - l + 1;
+                long add = len - 1;
+                while (curr + add > k) {
+                    l++;
+                    len = r - l + 1;
+                    add = len - 1;
+                }
+                curr += add;
+                ans[r] = l-1 >= 0 ? ans[l-1] : r+1;
+            }
+
+            for (int x : ans) pw.print(x + " ");
+            pw.println();
         }
     }
     // IMPORTANT

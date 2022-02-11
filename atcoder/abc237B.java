@@ -14,12 +14,23 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
+        int[] hw = ril(2);
+        int h = hw[0];
+        int w = hw[1];
+        int[][] a = new int[h][];
+        for (int i = 0; i < h; i++) a[i] = ril(w);
+        int[][] b = new int[w][h];
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                b[j][i] = a[i][j];
+            }
+        }
+        for (int[] row : b) {
+            for (int x : row) {
+                pw.print(x + " ");
+            }
+            pw.println();
         }
     }
     // IMPORTANT

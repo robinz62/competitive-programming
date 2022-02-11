@@ -1,37 +1,60 @@
+/*
+ID: robinz61
+LANG: JAVA
+TASK: gift1
+*/
 import java.io.*;
 import java.math.BigInteger;
 import java.util.*;
 
-public class Main {
+public class gift1 {
     static int MOD = 1000000007;
 
-    // After writing solution, quick scan for:
-    //   array out of bounds
-    //   special cases e.g. n=1?
-    //   npe, particularly in maps
-    //
-    // Big numbers arithmetic bugs:
-    //   int overflow
-    //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
-    //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
-    void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
+    static String input = "gift1.in";
+    static String output = "gift1.out";
 
+    void solve() throws IOException {
+        int n = ri();
+        List<String> people = new ArrayList<>();
+        for (int i = 0; i < n; i++) people.add(br.readLine());
+        Map<String, List<String>> gifts = new HashMap<>();
+        Map<String, Integer> initial = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            String person = br.readLine();
+            gifts.put(person, new ArrayList<>());
+            int[] xk = ril(2);
+            int x = xk[0];
+            int k = xk[1];
+            initial.put(person, x);
+            for (int j = 0; j < k; j++) gifts.get(person).add(br.readLine());
+        }
+        
+        Map<String, Integer> end = new HashMap<>();
+        for (String giver : gifts.keySet()) {
+            int have = initial.get(giver);
+            int k = gifts.get(giver).size();
+            if (k != 0) {
+                for (String receiver : gifts.get(giver)) {
+                    end.put(receiver, end.getOrDefault(receiver, 0) + have / k);
+                }
+            }
+            end.put(giver, end.getOrDefault(giver, 0) + (k == 0 ? have : have % k));
+        }
+        for (String person : people) {
+            int diff = end.get(person) - initial.get(person);
+            pw.println(person + " " + diff);
         }
     }
-    // IMPORTANT
-    // DID YOU CHECK THE COMMON MISTAKES ABOVE?
 
     // Template code below
 
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    PrintWriter pw = new PrintWriter(System.out);
+    static BufferedReader br;
+    static PrintWriter pw;
 
     public static void main(String[] args) throws IOException {
-        Main m = new Main();
+        br = new BufferedReader(new FileReader(input));
+        pw = new PrintWriter(new FileWriter(output));
+        gift1 m = new gift1();
         m.solve();
         m.close();
     }

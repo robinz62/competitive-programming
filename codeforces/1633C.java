@@ -14,12 +14,30 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
         int T = ri();
         for (int Ti = 0; Ti < T; Ti++) {
+            long[] hcdc = rll(2);
+            long hc = hcdc[0];
+            long dc = hcdc[1];
+            long[] hmdm = rll(2);
+            long hm = hmdm[0];
+            long dm = hmdm[1];
 
+            long[] kwa = rll(3);
+            long k = kwa[0];
+            long w = kwa[1];
+            long a = kwa[2];
+
+            boolean ok = false;
+            for (long i = 0; !ok && i <= k; i++) {
+                long dc_me = dc + w * i;
+                long hc_me = hc + a * (k - i);
+                long i_die = (hc_me + dm - 1) / dm;
+                long u_die = (hm + dc_me - 1) / dc_me;
+                if (u_die <= i_die) ok = true;
+            }
+            pw.println(ok ? "YES" : "NO");
         }
     }
     // IMPORTANT

@@ -19,7 +19,16 @@ public class Main {
     void solve() throws IOException {
         int T = ri();
         for (int Ti = 0; Ti < T; Ti++) {
+            long[] xm = rll(2);
+            long x = xm[0];
+            long m = xm[1];
 
+            long ops = Long.highestOneBit(x);
+            if ((x & (x-1)) != 0) ops = ops << 1;
+            ops = Long.numberOfTrailingZeros(ops) + 1;
+
+            if (m < ops) pw.println("0");
+            else pw.println(m - ops + 1);
         }
     }
     // IMPORTANT

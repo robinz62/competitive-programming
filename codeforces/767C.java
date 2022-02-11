@@ -14,16 +14,69 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
+        int n = ri();
+        t = new int[n];
+        List<List<Integer>> adj = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) adj.add(null);
+        root = -1;
+        for (int i = 0; i < n; i++) {
+            int[] at = ril(2);
+            if (at[0] != 0) {
+                if (adj.get(at[0]-1) == null) adj.set(at[0]-1, new ArrayList<>());
+                adj.get(at[0]-1).add(i);
+            } else root = i;
+            t[i] = at[1];
         }
+
+        int sum = 0;
+        for (int ti : t) sum += ti;
+        if (sum % 3 != 0) {
+            pw.println("-1");
+            return;
+        }
+        tgt = sum / 3;
+
+        dp = new int[n];
+        has = new int[n];
+        Arrays.fill(has, -1);
+        if (dfs(root, adj) && ans[0] != root && ans[1] != root) pw.println((ans[0]+1) + " " + (ans[1]+1));
+        else pw.println("-1");
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?
+
+    int tgt;
+    int root;
+    int[] t;
+    int[] dp;
+    int[] has;
+    int[] ans = new int[2];
+    boolean dfs(int u, List<List<Integer>> adj) {
+        dp[u] = t[u];
+        if (adj.get(u) != null) {
+            for (int v : adj.get(u)) {
+                if (dfs(v, adj)) return true;
+                dp[u] += dp[v];
+                if (has[v] != -1) {
+                    if (has[u] != -1) {
+                        ans[0] = has[u];
+                        ans[1] = has[v];
+                        return true;
+                    } else {
+                        has[u] = has[v];
+                    }
+                }
+            }
+        }
+        if (dp[u] == 2 * tgt && has[u] != -1) {
+            ans[0] = has[u];
+            ans[1] = u;
+            return true;
+        }
+        if (dp[u] == tgt) has[u] = u;
+        return false;
+    }
 
     // Template code below
 

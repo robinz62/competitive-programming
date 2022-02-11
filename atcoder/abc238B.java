@@ -14,13 +14,22 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
+        int n = ri();
+        int[] a = ril(n);
+        int total = 0;
+        TreeSet<Integer> cuts = new TreeSet<>();
+        cuts.add(0);
+        for (int ai : a) {
+            total = (total + ai) % 360;
+            cuts.add(total);
         }
+        List<Integer> l = new ArrayList<>(cuts);
+        int ans = 360 - l.get(l.size() - 1);
+        for (int i = 1; i < l.size(); i++) {
+            ans = Math.max(ans, l.get(i) - l.get(i-1));
+        }
+        pw.println(ans);
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?

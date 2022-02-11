@@ -14,12 +14,20 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
         int T = ri();
         for (int Ti = 0; Ti < T; Ti++) {
-
+            int[] nk = ril(2);
+            int n = nk[0];
+            int k = nk[1];
+            char[] s = rs();
+            int l = 0;
+            int r = n-1;
+            while (l < r) if (s[l++] != s[r--]) k--;
+            if (k < 0) pw.println("NO");
+            else if (k % 2 == 0) pw.println("YES");
+            else if (n % 2 == 1) pw.println("YES");
+            else pw.println("NO");
         }
     }
     // IMPORTANT

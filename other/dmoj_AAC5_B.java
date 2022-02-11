@@ -14,16 +14,28 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
+        int n = ri();
+        long[] a = new long[n];
+        for (int i = 1; i < n; i++) {
+            pw.println("? 1 " + (i+1));
+            pw.flush();
+            a[i] = rl();
         }
+        a[0] = a[1];
+        for (int i = 1; i < n; i++) a[0] = gcd(a[0], a[i]);
+        for (int i = 1; i < n; i++) a[i] /= a[0];
+        pw.print("! ");
+        pw.print(a[0]);
+        for (int i = 1; i < n; i++) pw.print(" " + a[i]);
+        pw.println();
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?
+
+    public static long gcd(long a, long b) {
+        return a == 0 ? b : gcd(b % a, a);
+    }
 
     // Template code below
 

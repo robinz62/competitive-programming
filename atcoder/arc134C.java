@@ -3,7 +3,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 public class Main {
-    static int MOD = 1000000007;
+    static int MOD = 998244353;
 
     // After writing solution, quick scan for:
     //   array out of bounds
@@ -14,16 +14,65 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
+        int[] nk = ril(2);
+        int n = nk[0];
+        int k = nk[1];  // <= 200
+        int[] a = ril(n);
+        
+        long countOthers = 0;
+        for (int ai : a) countOthers += ai;
+        countOthers -= a[0];
+        if ((long) a[0] - countOthers - k < 0) {
+            pw.println("0");
+            return;
         }
+        long excess = (long) a[0] - countOthers - k;
+
+        long[] fact = new long[k];
+        fact[0] = 1;
+        for (int i = 1; i < k; i++) fact[i] = fact[i-1] * i % MOD;
+        long[] invFact = new long[k];
+        for (int i = 0; i < k; i++) invFact[i] = modInverseFermat(fact[i], MOD);
+
+        // For i > 1, this is the prefix product [a[i], a[i]+k-1]
+        long[][] factorials = new long[n][k];
+        a[0] = (int) excess;
+        for (int i = 0; i < n; i++) {
+            factorials[i][0] = 1;
+            if (1 < k) factorials[i][1] = a[i] + 1;
+            for (int j = 2; j < k; j++) {
+                factorials[i][j] = factorials[i][j-1] * (a[i] + j) % MOD;
+            }
+        }
+
+        long ans = 1;
+        for (int i = 0; i < n; i++) {
+            long c = factorials[i][k-1] * invFact[k-1] % MOD;
+            ans = ans * c % MOD;
+        }
+
+        pw.println(ans);
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?
+
+    public static long modPow(long base, long exponent, long m) {
+        long ans = 1;
+        base = base % m;
+        while (exponent > 0) {
+            if ((exponent & 1) == 1) ans = (ans * base) % m;
+            exponent >>= 1;
+            base = (base * base) % m;
+        } 
+        return ans;
+    }
+
+    // Computes a^(-1) mod m, the modular inverse of a (modulo m). This
+    // algorithm is based on Fermat's little theorem. m must be prime. O(log m).
+    public static long modInverseFermat(long a, long m) {
+        return modPow(a, m - 2, m);
+    }
 
     // Template code below
 

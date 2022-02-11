@@ -1,37 +1,37 @@
+/*
+ID: robinz61
+LANG: JAVA
+TASK: ride
+*/
 import java.io.*;
 import java.math.BigInteger;
 import java.util.*;
 
-public class Main {
-    static int MOD = 1000000007;
+public class ride {
+    static int MOD = 47;
 
-    // After writing solution, quick scan for:
-    //   array out of bounds
-    //   special cases e.g. n=1?
-    //   npe, particularly in maps
-    //
-    // Big numbers arithmetic bugs:
-    //   int overflow
-    //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
-    //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
+    static String input = "ride.in";
+    static String output = "ride.out";
+
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
-        }
+        char[] s = rs();
+        char[] t = rs();
+        int sval = 1;
+        int tval = 1;
+        for (char c : s) sval = sval * (c - 'A' + 1) % MOD;
+        for (char c : t) tval = tval * (c - 'A' + 1) % MOD;
+        pw.println(sval == tval ? "GO" : "STAY");
     }
-    // IMPORTANT
-    // DID YOU CHECK THE COMMON MISTAKES ABOVE?
 
     // Template code below
 
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    PrintWriter pw = new PrintWriter(System.out);
+    static BufferedReader br;
+    static PrintWriter pw;
 
     public static void main(String[] args) throws IOException {
-        Main m = new Main();
+        br = new BufferedReader(new FileReader(input));
+        pw = new PrintWriter(new FileWriter(output));
+        ride m = new ride();
         m.solve();
         m.close();
     }

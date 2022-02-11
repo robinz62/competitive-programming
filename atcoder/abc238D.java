@@ -14,12 +14,31 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
         int T = ri();
         for (int Ti = 0; Ti < T; Ti++) {
-
+            long[] as = rll(2);
+            long a = as[0];
+            long s = as[1];
+            long tgt = s - 2l * a;
+            if (s - 2 * a < 0) {
+                pw.println("No");
+                continue;
+            }
+            boolean[] used = new boolean[62];
+            for (int b = 0; b < 62; b++) {
+                if (((1l << b) & a) > 0) used[b] = true;
+            }
+            boolean good = true;
+            while (good && tgt > 0) {
+                long bit = Long.highestOneBit(tgt);
+                int exp = Long.numberOfTrailingZeros(bit);
+                if (!used[exp]) {
+                    used[exp] = true;
+                    tgt -= bit;
+                } else good = false;
+            }
+            pw.println(good ? "Yes" : "No");
         }
     }
     // IMPORTANT

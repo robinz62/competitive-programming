@@ -1,37 +1,59 @@
+/*
+ID: robinz61
+LANG: JAVA
+TASK: beads
+*/
 import java.io.*;
 import java.math.BigInteger;
 import java.util.*;
 
-public class Main {
+public class beads {
     static int MOD = 1000000007;
 
-    // After writing solution, quick scan for:
-    //   array out of bounds
-    //   special cases e.g. n=1?
-    //   npe, particularly in maps
-    //
-    // Big numbers arithmetic bugs:
-    //   int overflow
-    //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
-    //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
-    void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
+    static String input = "beads.in";
+    static String output = "beads.out";
 
+    void solve() throws IOException {
+        int n = ri();
+        char[] s = rs();
+        List<int[]> counts = new ArrayList<>();
+        int count = 1;
+        for (int i = 1; i < n; i++) {
+            if (s[i] == s[i-1]) count++;
+            else {
+                counts.add(new int[]{s[i-1], count});
+                count = 1;
+            }
         }
+        counts.add(new int[]{s[n-1], count});
+        List<int[]> copy = new ArrayList<>(counts);
+        counts.addAll(copy);
+
+        int[] colors = new int[]{'r', 'b'};
+
+        int ans = 0;
+        for (int i = 0; i < counts.size()-1; i++) {
+            for (int leftcolor : colors) {
+                for (int rightcolor : colors) {
+                    int curr = 0;
+                    for (int j = i; j >= 0 && (counts.get(j)[0] == leftcolor || counts.get(j)[0] == 'w'); j--) curr += counts.get(j)[1];
+                    for (int j = i+1; j < counts.size() && (counts.get(j)[0] == rightcolor || counts.get(j)[0] == 'w'); j++) curr += counts.get(j)[1];
+                    ans = Math.max(ans, Math.min(curr, n));
+                }
+            }
+        }
+        pw.println(ans);
     }
-    // IMPORTANT
-    // DID YOU CHECK THE COMMON MISTAKES ABOVE?
 
     // Template code below
 
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    PrintWriter pw = new PrintWriter(System.out);
+    static BufferedReader br;
+    static PrintWriter pw;
 
     public static void main(String[] args) throws IOException {
-        Main m = new Main();
+        br = new BufferedReader(new FileReader(input));
+        pw = new PrintWriter(new FileWriter(output));
+        beads m = new beads();
         m.solve();
         m.close();
     }

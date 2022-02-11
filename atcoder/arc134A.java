@@ -14,13 +14,27 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
+        long[] nlw = rll(3);
+        int n = (int) nlw[0];
+        long l = nlw[1];
+        long w = nlw[2];
+        long[] a = rll(n);
+        long curr = 0;
+        long ans = 0;
+        int idx = 0;
+        while (curr < l) {
+            while (idx < n && a[idx] <= curr) {
+                curr = Math.max(curr, a[idx] + w);
+                idx++;
+            }
+            long next = idx == n ? l : a[idx];
+            long dist = next - curr;
+            long add = (dist + w - 1) / w;
+            ans += add;
+            curr += add * w;
         }
+        pw.println(ans);
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?

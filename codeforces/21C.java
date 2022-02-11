@@ -14,13 +14,28 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
+        int n = ri();
+        int[] a = ril(n);
 
+        int sum = 0;
+        for (int ai : a) sum += ai;
+        if (sum % 3 != 0) {
+            pw.println("0");
+            return;
         }
+
+        long ans = 0;
+
+        int tgt = sum / 3;
+        Map<Integer, Integer> map = new HashMap<>();
+        int curr = 0;
+        for (int i = 0; i < n-1; i++) {
+            curr += a[i];
+            if (curr == 2 * tgt) ans += map.getOrDefault(tgt, 0);
+            map.put(curr, map.getOrDefault(curr, 0) + 1);
+        }
+        pw.println(ans);
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?

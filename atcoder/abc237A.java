@@ -14,13 +14,11 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
-        int T = ri();
-        for (int Ti = 0; Ti < T; Ti++) {
-
-        }
+        BigInteger n = new BigInteger(br.readLine());
+        BigInteger upper = BigInteger.valueOf((1l << 31) - 1);
+        BigInteger lower = BigInteger.valueOf(-(1l << 31));
+        pw.println(n.compareTo(lower) >= 0 && n.compareTo(upper) <= 0 ? "Yes" : "No");
     }
     // IMPORTANT
     // DID YOU CHECK THE COMMON MISTAKES ABOVE?

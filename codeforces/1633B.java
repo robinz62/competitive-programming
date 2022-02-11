@@ -14,12 +14,14 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
         int T = ri();
         for (int Ti = 0; Ti < T; Ti++) {
-
+            int count0 = 0;
+            int count1 = 0;
+            char[] s = rs();
+            for (char c : s) if (c == '0') count0++; else count1++;
+            pw.println(count0 == count1 ? count0-1 : Math.min(count0, count1));
         }
     }
     // IMPORTANT

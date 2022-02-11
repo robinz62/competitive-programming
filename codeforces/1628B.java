@@ -14,12 +14,61 @@ public class Main {
     //   int overflow
     //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
     //   sorting, or taking max, after MOD
-    //
-    // Interactive problems: don't forget to flush between test cases
     void solve() throws IOException {
         int T = ri();
         for (int Ti = 0; Ti < T; Ti++) {
+            int n = ri();
+            char[][] s = new char[n][];
+            for (int i = 0; i < n; i++) s[i] = rs();
+            boolean done = false;
+            Set<String> set = new HashSet<>();
+            for (char[] si : s) {
+                if (si.length == 1) {
+                    pw.println("YES");
+                    done = true;
+                    break;
+                }
+                if (si.length == 2 && si[0] == si[1]) {
+                    pw.println("YES");
+                    done = true;
+                    break;
+                }
+                if (si.length == 3 && si[0] == si[2]) {
+                    pw.println("YES");
+                    done = true;
+                    break;
+                }
+                String me = new String(si);
+                String rev = new StringBuilder(me).reverse().toString();
+                if (set.contains(rev)) {
+                    pw.println("YES");
+                    done = true;
+                    break;
+                }
+                if (me.length() == 2) {
+                    // Does rev + X exist?
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        String cand = rev + c;
+                        if (set.contains(cand)) {
+                            pw.println("YES");
+                            done = true;
+                            break;
+                        }
+                    }
+                    if (done) break;
+                } else if (me.length() == 3) {
+                    String cand = new StringBuilder(me.substring(1)).reverse().toString();
+                    if (set.contains(cand)) {
+                        pw.println("YES");
+                        done = true;
+                        break;
+                    }
+                }
 
+                set.add(me);
+            }
+            if (done) continue;
+            pw.println("NO");
         }
     }
     // IMPORTANT
