@@ -1,0 +1,184 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main {
+    static int MOD = 1000000007;
+
+    int[][] dirs = new int[][]{{1,0}, {-1,0}, {0,1}, {0,-1}};
+
+    // After writing solution, quick scan for:
+    //   array out of bounds
+    //   special cases e.g. n=1?
+    //   npe, particularly in maps
+    //
+    // Big numbers arithmetic bugs:
+    //   int overflow
+    //   if (x : long) and (y : int), [y = x] does not compile, but [y += x] does
+    //   sorting, or taking max, after MOD
+    //
+    // Interactive problems: don't forget to flush between test cases
+    void solve() throws IOException {
+        int[] nmk = ril(3);
+        int n = nmk[0];
+        int m = nmk[1];
+        int k = nmk[2];
+
+        int[][] c = new int[n][];
+        for (int i = 0; i < n; i++) c[i] = ril(m);
+
+        // BFS, start with source everywhere, run for k iterations
+        // Process lower numbers first
+
+        List<Integer> init = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (c[i][j] != 0) {
+                    init.add(m * i + j);
+                }
+            }
+        }
+        Collections.sort(init, (a, b) -> {
+            int ai = a / m;
+            int aj = a % m;
+            int bi = b / m;
+            int bj = b % m;
+            return Integer.compare(c[ai][aj], c[bi][bj]);
+        });
+        Deque<Integer> q = new ArrayDeque<>(init);
+        for (int ki = 0; ki < k && !q.isEmpty(); ki++) {
+            int sz = q.size();
+            for (int x = 0; x < sz; x++) {
+                int u = q.remove();
+                int i = u / m;
+                int j = u % m;
+                for (int[] dir : dirs) {
+                    int nexti = i + dir[0];
+                    int nextj = j + dir[1];
+                    if (inbounds(n, m, nexti, nextj) && c[nexti][nextj] == 0) {
+                        c[nexti][nextj] = c[i][j];
+                        q.addLast(nexti * m + nextj);
+                    }
+                }
+            }
+        }
+
+        for (int[] row : c) {
+            pw.print(row[0]);
+            for (int j = 1; j < m; j++) pw.print(" " + row[j]);
+            pw.println();
+        }
+    }
+    // IMPORTANT
+    // DID YOU CHECK THE COMMON MISTAKES ABOVE?
+
+    boolean inbounds(int n, int m, int i, int j) {
+        return i >= 0 && i < n && j >= 0 && j < m;
+    }
+
+    // Template code below
+
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    PrintWriter pw = new PrintWriter(System.out);
+
+    public static void main(String[] args) throws IOException {
+        Main m = new Main();
+        m.solve();
+        m.close();
+    }
+
+    void close() throws IOException {
+        pw.flush();
+        pw.close();
+        br.close();
+    }
+
+    int ri() throws IOException {
+        return Integer.parseInt(br.readLine().trim());
+    }
+
+    long rl() throws IOException {
+        return Long.parseLong(br.readLine().trim());
+    }
+
+    int[] ril(int n) throws IOException {
+        int[] nums = new int[n];
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            int sign = 1;
+            c = br.read();
+            int x = 0;
+            if (c == '-') {
+                sign = -1;
+                c = br.read();
+            }
+            while (c >= '0' && c <= '9') {
+                x = x * 10 + c - '0';
+                c = br.read();
+            }
+            nums[i] = x * sign;
+        }
+        while (c != '\n' && c != -1) c = br.read();
+        return nums;
+    }
+
+    long[] rll(int n) throws IOException {
+        long[] nums = new long[n];
+        int c = 0;
+        for (int i = 0; i < n; i++) {
+            int sign = 1;
+            c = br.read();
+            long x = 0;
+            if (c == '-') {
+                sign = -1;
+                c = br.read();
+            }
+            while (c >= '0' && c <= '9') {
+                x = x * 10 + c - '0';
+                c = br.read();
+            }
+            nums[i] = x * sign;
+        }
+        while (c != '\n' && c != -1) c = br.read();
+        return nums;
+    }
+
+    int[] rkil() throws IOException {
+        int c = br.read();
+        int x = 0;
+        while (c >= '0' && c <= '9') {
+            x = x * 10 + c - '0';
+            c = br.read();
+        }
+        return ril(x);
+    }
+
+    long[] rkll() throws IOException {
+        int c = br.read();
+        int x = 0;
+        while (c >= '0' && c <= '9') {
+            x = x * 10 + c - '0';
+            c = br.read();
+        }
+        return rll(x);
+    }
+
+    char[] rs() throws IOException {
+        return br.readLine().toCharArray();
+    }
+
+    void sort(int[] A) {
+        Random r = new Random();
+        for (int i = A.length-1; i > 0; i--) {
+            int j = r.nextInt(i+1);
+            int temp = A[i];
+            A[i] = A[j];
+            A[j] = temp;
+        }
+        Arrays.sort(A);
+    }
+
+    void printDouble(double d) {
+        pw.printf("%.16f", d);
+    }
+}
