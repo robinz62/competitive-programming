@@ -9,6 +9,11 @@ int main() {
     int T;
     cin >> T;
     while (T--) {
-
+        int n;
+        cin >> n;
+        string a;
+        cin >> a;
+        sort(a.begin(), a.end());
+        cout << a << '\n';
     }
 }
