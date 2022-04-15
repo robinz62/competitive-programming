@@ -6,16 +6,16 @@ DEBUG_FLAGS := -g -fsanitize=address -fsanitize=undefined -fsanitize=float-divid
 # prefer not to use these.
 # DEBUG_FLAGS += -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC
 
-build: main.cpp
+build: main.cpp debug.h
 	g++ -o main -std=c++2a $(FLAGS) $(DEBUG_FLAGS) main.cpp
 
-build-fast: main.cpp
+build-fast: main.cpp debug.h
 	g++ -o main-fast -std=c++2a $(FLAGS) main.cpp
 
-build-17: main.cpp
+build-17: main.cpp debug.h
 	g++ -o main -std=c++17 $(FLAGS) $(DEBUG_FLAGS) main.cpp
 
-build-fast-17: main.cpp
+build-fast-17: main.cpp debug.h
 	g++ -o main-fast -std=c++17 $(FLAGS) main.cpp
 
 clean:

@@ -20,4 +20,6 @@ for keepsake.
 Make a copy of `template.cpp` and rename to `main.cpp`. Compile and run with
 `make build ; ./main < in`. This is set up to compile with maximum
 debuggability. If a fast binary is needed for some reason, use
-`make build-fast`.
+`make build-fast`. If needed, `debug.h` can be included to print container
+types. Just make sure to comment out the `#include` and any print statements
+before submitting.
