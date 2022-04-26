@@ -1,5 +1,6 @@
-// https://gist.github.com/SansPapyrus683/61b65d4d7ec223b48ebf5c3bb382ba8d
+// Adapted from https://gist.github.com/SansPapyrus683/61b65d4d7ec223b48ebf5c3bb382ba8d
 
+#include <array>
 #include <deque>
 #include <iostream>
 #include <map>
@@ -19,6 +20,15 @@ std::ostream& operator<<(std::ostream& out, const std::vector<T>& vec) {
         out << vec[i] << ", ";
     }
     return out << vec.back() << ']';
+}
+
+template <typename T, std::size_t N>
+std::ostream& operator<<(std::ostream& out, const std::array<T, N>& arr) {
+    out << '[';
+    for (int i = 0; i < (int) arr.size() - 1; i++) {
+        out << arr[i] << ", ";
+    }
+    return out << arr.back() << ']';
 }
 
 template <typename T1, typename T2>
