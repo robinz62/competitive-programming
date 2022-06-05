@@ -4,7 +4,8 @@ My solutions to problems from various websites.
 
 All code committed to this repo has received AC verdict, though not necessarily
 optimal (wrt theoretical running time). Code submitted to contests with partial
-scoring (i.e. Codechef) may also not have received full points.
+scoring (i.e. Codechef) may also not have received full points (usually
+mentioned at the top of the file).
 
 ## Java setup/workflow
 
